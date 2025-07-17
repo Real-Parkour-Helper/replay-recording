@@ -31,13 +31,17 @@ class ReplayRecorder {
         playerNames = emptyMap()
     )
     private var enabled: Boolean = false
+    private var players: Set<UUID> = emptySet()
 
     fun record(event: ReplayEvent) {
-        if (enabled) events.add(event)
+        if (!enabled) return
+        if (event.playerId !in players) return
+        events.add(event)
     }
 
     fun updateHeader(newHeader: KryoHeader) {
         header = newHeader
+        players = header.playerNames.keys.toHashSet()
     }
 
     fun saveToFile(filePath: String) {
