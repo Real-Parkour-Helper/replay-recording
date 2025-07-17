@@ -21,7 +21,7 @@ fun handlePositionLook(event: PacketEvent, recorder: ReplayRecorder) {
         ReplayEvent(
             timestamp = System.currentTimeMillis(),
             playerId = event.player.uniqueId,
-            type = PacketTypeEnum.POSITION,
+            type = PacketTypeEnum.POSITION_LOOK,
             data = mapOf(
                 "x" to x,
                 "feetY" to feetY,
