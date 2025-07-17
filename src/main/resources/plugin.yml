@@ -1,0 +1,16 @@
+name: ReplayRecording
+version: 0.1.0
+main: org.realparkourhelper.ReplayRecording
+description: Plugin to record matches and save them to a file
+author: Tauktes
+
+commands:
+  start:
+    description: Start the parkour match (starts with a 15s countdown)
+    usage: /startReplay
+    permission: pkd.admin
+
+permissions:
+  pkd.admin:
+    description: Allows running admin tasks (start match etc.)
+    default: op
