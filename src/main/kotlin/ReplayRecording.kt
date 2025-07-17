@@ -8,7 +8,6 @@ import com.comphenix.protocol.events.PacketEvent
 import org.bukkit.plugin.java.JavaPlugin
 
 import org.realparkourhelper.handlers.handleChat
-import org.realparkourhelper.ReplayRecorder
 
 class ReplayRecording: JavaPlugin() {
 
@@ -32,11 +31,8 @@ class ReplayRecording: JavaPlugin() {
     override fun onEnable() {
         protocolManager = ProtocolLibrary.getProtocolManager()
 
-        // Register the packet listener
         protocolManager.addPacketListener(object : PacketAdapter(this, packetsToSave) {
             override fun onPacketReceiving(event: PacketEvent) {
-                val type = event.packet.type
-
                 when (event.packet.type) {
                     PacketType.Play.Client.CHAT -> handleChat(event, recorder)
                     PacketType.Play.Client.FLYING -> handleFlying(event, recorder)
@@ -54,11 +50,6 @@ class ReplayRecording: JavaPlugin() {
         })
 
         logger.info("ReplayRecorder enabled with packet listener.")
-    }
-
-    private fun savePacket(player: String, packetType: String, data: String) {
-        // Replace this with actual saving logic (file, db, etc.)
-        logger.info("Saving packet from $player: $packetType -> $data")
     }
 
     override fun onDisable() {
