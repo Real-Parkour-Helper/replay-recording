@@ -1,7 +1,6 @@
 package org.realparkourhelper
 
 import java.util.UUID
-import java.io.File
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Output
 import java.io.FileOutputStream
@@ -31,9 +30,10 @@ class ReplayRecorder {
         mapName = "default",
         playerNames = emptyMap()
     )
+    private var enabled: Boolean = false
 
     fun record(event: ReplayEvent) {
-        events.add(event)
+        if (enabled) events.add(event)
     }
 
     fun updateHeader(newHeader: KryoHeader) {
@@ -60,10 +60,19 @@ class ReplayRecorder {
         output.close()
     }
 
-
     fun clear() {
         events.clear()
     }
 
-    fun getEvents(): List<ReplayEvent> = events.toList()
+    fun enable() {
+        enabled = true
+    }
+
+    fun disable() {
+        enabled = false
+    }
+
+    fun getStatus(): Boolean {
+        return enabled
+    }
 }
