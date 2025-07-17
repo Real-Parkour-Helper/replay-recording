@@ -6,9 +6,9 @@ enum class PacketTypeEnum {
     POSITION,
     LOOK,
     POSITION_LOOK,
-    PLAYER_DIGGING,
-    HELD_ITEM_CHANGE,
-    ANIMATION,
+    BLOCK_DIG,
+    HELD_ITEM_SLOT,
+    ARM_ANIMATION,
     ENTITY_ACTION,
     BLOCK_PLACE
 }
