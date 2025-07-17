@@ -20,14 +20,24 @@ data class KryoHeader(
     val createdAt: Long,
     val mapName: String,
     val playerNames: Map<UUID, String>,
-
 )
 
-class ReplayRecorder(private val header: KryoHeader) {
-    private val events = mutableListOf<ReplayEvent>()
+class ReplayRecorder {
+    private var events = mutableListOf<ReplayEvent>()
+    private var header = KryoHeader(
+        version = 0,
+        gameId = "default",
+        createdAt = 0,
+        mapName = "default",
+        playerNames = emptyMap()
+    )
 
     fun record(event: ReplayEvent) {
         events.add(event)
+    }
+
+    fun updateHeader(newHeader: KryoHeader) {
+        header = newHeader
     }
 
     fun saveToFile(filePath: String) {
