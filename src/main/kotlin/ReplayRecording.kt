@@ -7,9 +7,13 @@ import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketEvent
 import org.bukkit.plugin.java.JavaPlugin
 
+import org.realparkourhelper.handlers.handleChat
+import org.realparkourhelper.ReplayRecorder
+
 class ReplayRecording: JavaPlugin() {
 
     private lateinit var protocolManager: ProtocolManager
+    private lateinit var recorder: ReplayRecorder
 
     private val packetsToSave = listOf(
         PacketType.Play.Client.CHAT,
@@ -34,16 +38,16 @@ class ReplayRecording: JavaPlugin() {
                 val type = event.packet.type
 
                 when (event.packet.type) {
-                    PacketType.Play.Client.CHAT -> handleChat(event)
-                    PacketType.Play.Client.FLYING -> handleFlying(event)
-                    PacketType.Play.Client.POSITION -> handlePosition(event)
-                    PacketType.Play.Client.LOOK -> handleLook(event)
-                    PacketType.Play.Client.POSITION_LOOK -> handlePositionLook(event)
-                    PacketType.Play.Client.BLOCK_DIG -> handleBlockDig(event)
-                    PacketType.Play.Client.HELD_ITEM_SLOT -> handleHeldItemChange(event)
-                    PacketType.Play.Client.ARM_ANIMATION -> handleArmAnimation(event)
-                    PacketType.Play.Client.ENTITY_ACTION -> handleEntityAction(event)
-                    PacketType.Play.Client.BLOCK_PLACE -> handleBlockPlace(event)
+                    PacketType.Play.Client.CHAT -> handleChat(event, recorder)
+                    PacketType.Play.Client.FLYING -> handleFlying(event, recorder)
+                    PacketType.Play.Client.POSITION -> handlePosition(event, recorder)
+                    PacketType.Play.Client.LOOK -> handleLook(event, recorder)
+                    PacketType.Play.Client.POSITION_LOOK -> handlePositionLook(event, recorder)
+                    PacketType.Play.Client.BLOCK_DIG -> handleBlockDig(event, recorder)
+                    PacketType.Play.Client.HELD_ITEM_SLOT -> handleHeldItemChange(event, recorder)
+                    PacketType.Play.Client.ARM_ANIMATION -> handleArmAnimation(event, recorder)
+                    PacketType.Play.Client.ENTITY_ACTION -> handleEntityAction(event, recorder)
+                    PacketType.Play.Client.BLOCK_PLACE -> handleBlockPlace(event, recorder)
                     else -> {}
                 }
             }
