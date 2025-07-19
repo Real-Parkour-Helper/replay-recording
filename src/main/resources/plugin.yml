@@ -3,3 +3,6 @@ version: 0.1.0
 main: org.realparkourhelper.ReplayRecording
 description: Plugin to record matches and save them to a file
 author: Tauktes
+
+depend:
+  - ProtocolLib

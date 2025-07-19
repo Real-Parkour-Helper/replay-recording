@@ -6,7 +6,7 @@ import org.realparkourhelper.ReplayRecorder
 import org.realparkourhelper.ReplayEvent
 
 fun handleHeldItemSlot(event: PacketEvent, recorder: ReplayRecorder) {
-    val slot = event.packet.shorts.read(0)
+    val slot = event.packet.integers.read(0)
 
     recorder.record(
         ReplayEvent(

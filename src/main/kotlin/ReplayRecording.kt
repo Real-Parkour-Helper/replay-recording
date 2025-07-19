@@ -41,6 +41,7 @@ class ReplayRecording: JavaPlugin() {
 
 
     override fun onEnable() {
+        recorder = ReplayRecorder()
         api = ReplayRecordingApi(recorder)
         server.servicesManager.register(ReplayRecordingApi::class.java, api, this, ServicePriority.Normal)
 
